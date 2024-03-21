@@ -30,51 +30,51 @@ SELECT COALESCE(
     )
 From persons
     -- long term procces, not recomended
-SELECT *
-FROM persons
-WHERE
-    country = 'USA'
-    OR country = 'US'
-    OR country = 'B'
-    -- perfect procce
-SELECT *
-FROM persons
-WHERE
-    country IN ('USA', 'US')
-    --like oparator
-SELECT *
-from persons
-WHERE
-    first_name LIKE '__n' --LIKE is case sensitive
-SELECT *
-from persons
-WHERE
-    first_name ILIKE '__n' --ILIKE is not case sensitive
+SELECT * FROM persons WHERE country = 'USA' OR country = 'US' OR country = 'B'
+
+    -- perfect procce;
+SELECT * FROM persons WHERE country IN ('USA', 'US') --like oparator;
+SELECT * from persons WHERE first_name LIKE '__n' --LIKE is case sensitive;
+
+SELECT * from persons WHERE first_name ILIKE '__n' --ILIKE is not case sensitive
     --LIMIT OFFSET
-SELECT *
-FROM persons
-WHERE
-    country IN ('USA', 'US')
-LIMIT 5
-SELECT *
-FROM persons
-WHERE
-    country IN ('USA', 'US')
-LIMIT 5
-OFFSET
-    1 --OFFSET used for ignore first data
+SELECT * FROM persons WHERE country IN ('USA', 'US')LIMIT 5;
+SELECT * FROM persons WHERE country IN ('USA', 'US') LIMIT 5 OFFSET 1 --OFFSET used for ignore first data
+
 ---DELETE oparation
-DELETE FROM persons
-WHERE
-    grade = 'B+'
-DELETE FROM persons
-WHERE
-    grade = 'W+'
-    AND country = 'BD'
+DELETE FROM persons WHERE grade = 'B+';
+DELETE FROM persons WHERE grade = 'W+' AND country = 'BD';
 
 ---UPDATE oparation
-UPDATE persons
-set
-    email = 'update@gmail.com',age=233
-WHERE
-    student_id = 1;
+UPDATE persons set email = 'update@gmail.com',age=233 WHERE student_id = 1;
+
+---Date time ZONE
+  SELECT now()
+
+  CREATE Table timeZ (ts TIMESTAMP without time zone, tsz TIMESTAMP with time zone)
+
+  INSERT INTO timez VALUES('2024-01-12 10:45:00', '2024-01-12 10:45:00')
+
+  SELECT * FROM timez
+
+  SELECT now()::date;
+
+  SELECT now()::time
+
+  SELECT to_char(now(), 'yyyy/mm/dd')
+
+  SELECT CURRENT_DATE -INTERVAL ' 8 month'
+
+  SELECT age(CURRENT_DATE, '2004-01-07')
+
+  SELECT *, age(CURRENT_DATE,dob) from persons;
+
+   
+   ---GROUP
+   SELECT country,avg(age) from persons
+    GROUP BY country HAVING avg(age)>20.00
+
+    SELECT extract(YEAR FROM dob) as birth_year, count(*) FROM persons GROUP BY birth_year
+
+
+    
